@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block nav %}
+
+<ul class="nav pull-right">
+	<li class="dropdown">
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			<i class="icon-user icon-white"></i>
+			{{ user.username }}
+			<strong class="caret"></strong>
+		</a>
+		<ul class="dropdown-menu">
+			<li>
+				<a href="{% url view user.username %}"><strong>{{ user.profile.name }}</strong><br />View my profile page</a>
+			</li>
+			<li class="divider"></li>
+			<li>
+				<a href="{% url edit %}">Edit Profile</a>
+			</li>
+			<li><a href="{% url auth_password_change %}">Change password</a>
+			</li>
+			<li class="divider"></li>
+			<li>
+				<a href="{% url auth_logout %}">Log out</a>
+			</li>
+		</ul> <!-- .dropdown-menu -->
+	</li> <!-- .dropdown -->
+	<li>
+		<a data-toggle="modal" href="#chirp">Chirp</a>
+	</li>
+</ul> <!-- .nav.pull-right -->
+
+{% endblock %}
+
+{% block modal %}
+
+<div class="modal hide fade in" id="chirp">
+	<form action="{% url cheep %}" method="POST">
+		<div class="modal-header">
+			<a class="close" data-dismiss="modal">x</a>
+			<h3>What's happening?</h3>
+		</div>
+		<div class="modal-body">
+			{{ chirper }}
+			{% csrf_token %}
+			<input class="btn btn-primary" type="submit" value="Chirp!" />
+		</div>
+	</form>
+</div>
+
+{% endblock %}
