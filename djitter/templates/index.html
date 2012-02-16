@@ -1,0 +1,27 @@
+{% extends "loggedin.html" %}
+
+{% block title %}{{ block.super }} / Home{% endblock %}
+
+{% block content %}
+
+<div class="row">
+	<div class="span3 offset1 well">
+		<h2>{{ user.profile.name }}</h2>
+		<form action="{% url cheep %}" method="POST">
+			{{ chirper }}
+			<input type="submit" value="Chirp!" />
+			{% csrf_token %}
+		</form>
+	</div>
+	<div class="span6 well">
+		<h3>Chirps</h3>
+		<ul id="chirps" class="unstyled">
+			<li class="chirp-header"></li>
+			{% for chirp in chirps %}
+				{% include "snippets/chirp.html" %}
+			{% endfor %}
+		</ul>
+	</div>
+</div>
+
+{% endblock %}

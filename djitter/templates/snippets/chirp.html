@@ -1,0 +1,10 @@
+{% load djittertags %}
+<li class="chirp">
+	<small class="time pull-right"><!-- fill me in! --></small>
+	<a href="<!-- fill me in! -->">
+		<img src="{{ chirp.user.email|gravatar:48 }}" class="pull-left avatar" />
+		<strong><!-- fill me in! --></strong>
+		<span class="username">@<!-- fill me in! --></span>
+	</a>
+	<p>{% chirptag chirp.text %}</p>
+</li>

@@ -1,0 +1,72 @@
+{% extends "loggedin.html" %}
+{% load i18n %}
+{% load djittertags %}
+
+{% block title %}{{ viewing.profile.name }} ({{ viewing.username }}) on {{ block.super }}{% endblock %}
+
+{% block content %}
+
+<div class="row">
+	<div class="span10 offset1">
+		<div class="row well">
+			<div class="span7">
+				<a href="{% if viewing == user %}http://gravatar.com/emails/{% else %}#{% endif %}">
+					<img src="{{ viewing.email|gravatar:128 }}" class="avatar pull-left" />
+				</a>
+				
+				<h1 class="fullname"><!--- fill me in! ---></h1>
+				<h2 class="username">@<!--- fill me in! ---></h2>
+				
+				<p class="bio"><!--- fill me in! ---></p>
+				<p class="location-and-url">
+					<span class="location"><!--- fill me in! ---></span>
+					<span class="divider">·</span>
+					<span class="url"><!--- fill me in! ---></span>
+				</p>
+			</div> <!-- .span7 -->
+			<div class="span2 pull-right">
+				{% include "snippets/follow.html" %}
+			</div> <!-- .span1 -->
+		</div> <!-- .row -->
+		<div class="row">
+			<div class="span4 view-followering pull-left">
+				<div class="sidebar-nav">
+					<div class="well">
+						<h3>Following:</h3>
+						<ul id="following">
+							<!--- fill me in! --->
+								<li class = "followee">
+									<a href = "{% url view followee.username %}">{{ followee.username }}</a>
+								</li>
+							<!--- fill me in! --->
+						</ul>
+					</div>	
+					<div class="well">
+						<h3>Followers:</h3>
+						<ul id="followers">
+							{% for follower in viewing.followers.all %}
+								<li class = "follower">
+									<a href = "{% url view follower.user.username %}">{{ follower.user.username }}</a>
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="span6 view-chirps">
+				<div class="row well">
+					<h3>Chirps</h3>
+					<ul id="chirps" class="unstyled">
+						<li class="chirp-header"></li>
+						<!--- fill me in! --->
+							{% include "snippets/chirp.html" %}
+						<!--- fill me in! --->
+					</ul>
+				</div>
+			</div>
+		</div> <!-- .row -->
+	</div> <!-- .span10.offset1 -->
+</div> <!-- .row -->
+
+
+{% endblock %}
